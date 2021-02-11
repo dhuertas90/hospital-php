@@ -1,0 +1,88 @@
+{% extends "backendGeneral.html.twig" %}
+	
+{% block content %}
+	<section class="container">
+			<table>
+				<tr>
+					<th>Fecha</th>
+					<td>{{historia.fecha}}</td>
+				</tr>
+				<tr>
+					<th>Edad (Semanas)</th>
+					<td>{{edad}}</td>
+				</tr>
+				<tr>
+					<th>Peso (Gramos)</th>
+					<td>{{historia.peso}}</td>
+				</tr>
+				<tr>
+					<th>Vacunas completas?</th>
+					<td>{% if historia.vacunas == 1 %}
+						SI
+						{% endif %}
+						{% if historia.vacunas == 0 %}
+						NO
+						{% endif %}
+					</td>
+				</tr>
+				<tr>
+					<th>Vacunas observaciones</th>
+					<td>{{historia.vacunas_obs}}</td>
+				</tr>
+				<tr>
+					<th>Maduracion acorde?</th>
+					<td>{% if historia.maduracion == 1 %}
+						SI
+						{% endif %}
+						{% if historia.maduracion == 0 %}
+						NO
+						{% endif %}
+					</td>
+				</tr>
+				<tr>
+					<th>Maduracion observaciones</th>
+					<td>{{historia.maduracion_obs}}</td>
+				</tr>
+				<tr>
+					<th>Examen fisico normal?</th>
+					<td>{% if historia.examen_f == 1 %}
+						SI
+						{% endif %}
+						{% if historia.examen_f == 0 %}
+						NO
+						{% endif %}
+					</td>
+				</tr>
+				<tr>
+					<th>Examen fisico observaciones</th>
+					<td>{{historia.examen_f_obs}}</td>
+				</tr>
+				<tr>
+					<th>PC</th>
+					<td>{{historia.pc}}</td>
+				</tr>
+				<tr>
+					<th>PPC</th>
+					<td>{{historia.ppc}}</td>
+				</tr>
+				<tr>
+					<th>Talla (Centimetros)</th>
+					<td>{{historia.talla}}</td>
+				</tr>
+				<tr>
+					<th>Alimentacion</th>
+					<td>{{historia.alimentacion}}</td>
+				</tr>
+				<tr>
+					<th>Observaciones Generales</th>
+					<td>{{historia.obs_grales}}</td>
+				</tr>
+				<tr>
+					<th>Usuario</th>
+					<td>{{usuario_control}}</td>
+				</tr>
+
+			</table>
+			<a class="volver" href="historiaVerTodas.php?id_paciente={{historia.id_paciente}}"><i class="btn btn-info">VOLVER</i></a>
+		</section>
+{% endblock %}

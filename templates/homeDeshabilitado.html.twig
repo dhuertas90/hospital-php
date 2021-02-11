@@ -1,0 +1,19 @@
+{% extends "base.html.twig" %}
+
+{% block css %}
+	<link rel="stylesheet" type="text/css" href="./templates/index.css" />
+{% endblock css %}
+
+{% block nav %}
+	<ul class="ulNav">
+		<li><a href="">LOGO</a></li>
+		<li><a href="">HOME</a></li>
+		<li style="float:right"><a href="login.php">LOGIN</a></li>
+	</ul>
+{% endblock nav %}
+
+{% block content %}
+	<div class="container">
+				<h1>{{mensaje}}</h1>
+	</div>
+{% endblock content %}

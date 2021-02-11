@@ -1,0 +1,50 @@
+{% extends "backendGeneral.html.twig" %}
+{% block content %}
+<div class="row">
+	<div class="col-sm-4"></div>
+	<div class="col-sm-5">
+			<h1>Configuraciones</h1>
+			<div id="mensaje" class="mensaje">{{error}}</div>
+			<form class="formulario" method="post" action="checkearConfiguracion.php">
+					<div class="form-group">
+						<label for="titulo">T&iacute;itulo del hospital:</label><br>
+						<input type="text" id="titulo" name="titulo" required="required" placeholder="Ingrese Título" value="{{info_config.titulo}}" class="form-control">
+					</div>
+					<div class="form-group">
+						<label for="descripcion">Descripci&oacute;n del hospital:</label><br>
+						<textarea class="form-control" id="descripcion" name="descripcion" required="required" placeholder="Ingrese Descripcion del hospital" rows="4" cols="40" >{{info_config.descripcion_hospital}}</textarea >
+					</div>
+					<div class="form-group">
+						<label for="email">Email de contacto:</label><br>
+						<input type="email" id="email" name="email" required="required" placeholder="Ingrese email de contacto" value="{{info_config.mail}}" class="form-control">
+					</div>
+					<div class="form-group">
+						<label for="cantidad_pagina">Cantidad de elemento por p&aacute;gina</label><br>
+						<input type="number" id="cantidad-pagina" name="cantidad-pagina" required="required" min="1" placeholder="Ingrese cantidad" value="{{info_config.cantidad_pagina}}" class="form-control">
+					</div>
+					<div class="form-group">
+						{% if info_config.habilitado == 1 %}
+						{% set habilitado="checked" %}
+						{% set deshabilitado="" %}
+						{% endif %}
+						{% if info_config.habilitado == 0 %}
+						{% set habilitad0="" %}
+						{% set deshabilitado="checked" %}
+						{% endif %}
+						<label id="hablilitado">Habilitar sitio:</label><br>
+						Si<input type="radio" id="habilitado" name="habilitado" value="1" {{habilitado}} >
+						No<input type="radio" id="habilitado" name="habilitado" value="0" {{deshabilitado}} >
+					</div>
+					<div class="form-group">
+						<label for="mensaje">Mensaje en deshabilitaci&oacute;n</label><br>
+						<textarea class="form-control" id="mensaje" name="mensaje" required="required" placeholder="Ingrese mensaje" rows="4" cols="40">{{info_config.mensaje}}</textarea >
+					</div>
+					<div class="form-group">
+					<input type="submit" value="GUARDAR" class="btn btn-success">
+					<a class="btn btn-danger" href="backend.php" >Cancelar</a>
+					</div>
+			</form>
+	</div>
+	<div class="col-sm-3"></div>
+</div>
+{% endblock content %}

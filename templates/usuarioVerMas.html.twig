@@ -1,0 +1,47 @@
+{% extends "backendGeneral.html.twig" %}
+	
+{% block content %}
+	<section class="container">
+
+			<table class="table-striped">
+				<tr>
+					<th>Nombre de usuario</th>
+					<td>{{ datos_usuario.username }}</td>
+				</tr>
+				<tr>
+					<th>Nombre</th>
+					<td>{{ datos_usuario.firstname }}</td>
+				</tr>
+				<tr>
+					<th>Apellido</th>
+					<td>{{ datos_usuario.lastname }}</td>
+				</tr>
+				<tr>
+					<th>Email</th>
+					<td>{{ datos_usuario.email }}</td>
+				</tr>
+				<tr>
+					<th>Habilitado</th>
+					{% if datos_usuario.active == 1 %}
+					<td>Si</td>
+					{% endif %}
+					{% if datos_usuario.active == 0 %}
+					<td>No</td>
+					{% endif %}
+				</tr>
+				<tr>
+					<th>Roles</th>
+					{% for rol in usuario_roles %}
+						<td>{{ rol }}<td>
+					{% endfor %}
+				</tr>
+				<tr>
+					<th>Permisos</th>
+					{% for p in usuario_permisos %}
+						<td>{{ p }}<td>
+					{% endfor %}
+				</tr>
+			</table>
+			<a class="volVer" href="usuarios.php"><i class="btn btn-info">VOLVER</i></a>
+		</section>
+{% endblock %}

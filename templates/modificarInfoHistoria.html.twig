@@ -1,0 +1,89 @@
+{% extends "backendGeneral.html.twig" %}
+
+{% block content %}
+<div class="row">
+	<div class="col-sm-4"></div>
+	<div class="col-sm-5">
+	<h1>Modificar historia clinica</h1>
+	
+	<div id="mensaje" class="mensaje">Los campos que tienen (*) son todos obligatorios.</div>
+
+	<form class="formulario form-horizontal" id="form" action="historiaModificar.php" method="post">
+
+		<input type="hidden" id="id_paciente" name="id_paciente" value="{{historia.id_paciente}}">
+		<input type="hidden" id="id_historia" name="id_historia" value="{{historia.id}}">
+
+		<div class="form-group">
+			<label for="fecha" class="control-label">Fecha(*):</label>
+			<input type="date" id="fecha" name="fecha" class="form-control" value="{{historia.fecha}}" placeholder="Ingrese fecha" required>
+		</div>
+
+		<div class="form-group">
+			<label for="peso" class="control-label">Peso(*):</label>
+			<input type="number" id="peso" name="peso" value="{{historia.peso}}" class="form-control" required> (Gramos)
+		</div>
+		<div class="form-group">
+			<label for="vacunas" class="control-label">Vacunas completas?(*):</label>
+			<select name="vacunas" id="vacunas" class="form-control" required>
+				<option value="1" {% if historia.vacunas==1 %} selected {% endif %}>SI</option>
+				<option value="0" {% if historia.vacunas==0 %} selected {% endif %}>NO</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="vacunas_obs">Vacunas observaciones(*):</label>
+			<input type="text" id="vacunas_obs" name="vacunas_obs" value="{{historia.vacunas_obs}}" class="form-control" required>
+		</div>
+		<div class="form-group">
+			<label for="maduracion">Maduracion acorde?(*):</label>
+			<select name="maduracion" id="maduracion" class="form-control" required>
+				<option value="1" {% if historia.maduracion==1 %} selected {% endif %}>SI</option>
+				<option value="0" {% if historia.maduracion==0 %} selected {% endif %}>NO</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="maduracion_obs">Maduracion observaciones(*):</label>
+			<input type="text" id="maduracion_obs" name="maduracion_obs" value="{{historia.maduracion_obs}}" class="form-control" required>
+		</div>
+		<div class="form-group">
+			<label for="examen_f">Examen f&iacute;sico normal?(*):</label>
+			<select name="examen_f" id="examen_f" class="form-control" required>
+				<option value="1" {% if historia.examen_f==1 %} selected {% endif %}>SI</option>
+				<option value="0" {% if historia.examen_f==0 %} selected {% endif %}>NO</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="examen_f_obs">Examen f&iacute;sico observaciones(*):</label>
+			<input type="text" id="examen_f_obs" name="examen_f_obs" value="{{historia.examen_f_obs}}" class="form-control" required>
+		</div>
+		<div class="form-group">
+			<label for="pc" class="control-label">Percentilo cef&aacute;lico (PC):</label>
+			<input type="number" id="pc" name="pc" class="form-control" value="{{historia.pc}}" placeholder="Ingrese PC" step="0.01">
+		</div>
+		<div class="form-group">
+			<label for="ppc" class="control-label">Percentilo per&iacute;metro cef&aacute;lico (PPC):</label>
+			<input type="number" id="ppc" name="ppc" class="form-control" value="{{historia.ppc}}" placeholder="Ingrese PPC" step="0.01">
+		</div>
+		<div class="form-group">
+			<label for="talla" class="control-label">Talla:</label>
+			<input type="number" id="talla" name="talla" value="{{historia.talla}}" class="form-control" > (Centimetros)
+		</div>
+		<div class="form-group">
+			<label for="alimentacion">Alimentaci&oacute;n:</label>
+			<input type="text" id="alimentacion" name="alimentacion" value="{{historia.alimentacion}}" class="form-control">
+		</div>
+		<div class="form-group">
+			<label for="obs_grales">Observaciones Generales:</label>
+			<input type="text" id="obs_grales" name="obs_grales" value="{{historia.obs_grales}}" class="form-control">
+		</div>
+		<div class="form-group">
+			<label for="usuario">Usuario:</label>
+			<input type="text" id="usuario" name="usuario" value="{{usuario_control}}" class="form-control" readonly="readonly">
+		</div>
+
+		<input type="submit" id="guardar" value="GUARDAR" class="btn btn-success">
+		<a class="btn btn-danger" href="historiaVerTodas.php?id_paciente={{historia.id_paciente}}">CANCELAR</a>
+	</form>
+	</div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,91 @@
+{% extends "backendGeneral.html.twig" %}
+
+{% block content %}
+<div class="row">
+	<div class="col-sm-4"></div>
+	<div class="col-sm-5">
+	<h1>Nueva historia clinica</h1>
+	
+	<div id="mensaje" class="mensaje">Los campos que tienen (*) son todos obligatorios.</div>
+
+	<form class="formulario form-horizontal" id="form" action="historiaAgregar.php" method="post">
+
+		<input type="hidden" id="id_paciente" name="id_paciente" value="{{paciente}}">
+
+		<div class="form-group">
+			<label for="fecha" class="control-label">Fecha(*):</label>
+			<input type="date" id="fecha" name="fecha" class="form-control" placeholder="Ingrese fecha" required>
+		</div>
+		<div class="form-group">
+			<label for="peso" class="control-label">Peso(*):</label>
+			<input type="number" id="peso" name="peso" class="form-control" required> (Gramos)
+		</div>
+		<div class="form-group">
+			<label for="vacunas" class="control-label">Vacunas completas?(*):</label>
+			<select name="vacunas" id="vacunas" class="form-control" required>
+				<option value="" selected>-- Seleccione una opcion --</option>
+				<option value="1">SI</option>
+				<option value="0">NO</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="vacunas_obs">Vacunas observaciones(*):</label>
+			<input type="text" id="vacunas_obs" name="vacunas_obs" class="form-control" required>
+		</div>
+		<div class="form-group">
+			<label for="maduracion">Maduracion acorde?(*):</label>
+			<select name="maduracion" id="maduracion" class="form-control" required>
+				<option value="" selected>-- Seleccione una opcion --</option>
+				<option value="1">SI</option>
+				<option value="0">NO</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="maduracion_obs">Maduracion observaciones(*):</label>
+			<input type="text" id="maduracion_obs" name="maduracion_obs" class="form-control" required>
+		</div>
+		<div class="form-group">
+			<label for="examen_f">Examen f&iacute;sico normal?(*):</label>
+			<select name="examen_f" id="examen_f" class="form-control" required>
+				<option value="" selected>-- Seleccione una opcion --</option>
+				<option value="1">SI</option>
+				<option value="0">NO</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="examen_f_obs">Examen f&iacute;sico observaciones(*):</label>
+			<input type="text" id="examen_f_obs" name="examen_f_obs" class="form-control" required>
+		</div>
+		<div class="form-group">
+			<label for="pc" class="control-label">Percentilo cef&aacute;lico (PC):</label>
+			<input type="number" id="pc" name="pc" class="form-control" placeholder="Ingrese PC">
+		</div>
+		<div class="form-group">
+			<label for="ppc" class="control-label">Percentilo per&iacute;metro cef&aacute;lico (PPC):</label>
+			<input type="number" id="ppc" name="ppc" class="form-control" placeholder="Ingrese PPC">
+		</div>
+		<div class="form-group">
+			<label for="talla" class="control-label">Talla:</label>
+			<input type="number" id="talla" name="talla" class="form-control"> (Centimetros)
+		</div>
+		<div class="form-group">
+			<label for="alimentacion">Alimentaci&oacute;n:</label>
+			<input type="text" id="alimentacion" name="alimentacion" class="form-control">
+		</div>
+		<div class="form-group">
+			<label for="obs_grales">Observaciones Generales:</label>
+			<input type="text" id="obs_grales" name="obs_grales" class="form-control">
+		</div>
+		<div class="form-group">
+			<label for="usuario">Usuario:</label>
+			<input type="text" id="usuario" name="usuario" value="{{usuario}}" readonly="readonly" class="form-control">
+		</div>
+
+		<input type="submit" id="agregar" value="AGREGAR" class="btn btn-success">
+		<a class="btn btn-danger" href="pacientes.php">CANCELAR</a>
+	</form>
+	</div>
+	<div class="col-sm-3"></div>
+</div>
+
+{% endblock %}

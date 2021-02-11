@@ -1,0 +1,130 @@
+{% extends "backendGeneral.html.twig" %}
+	
+{% block content %}
+	<div class="container">
+	    {% if msj != '' %}
+			<script type="text/javascript"> alertify.success('{{msj}}')</script>
+		{% endif %}
+		<div class="div-pacientes">
+			{% if "paciente_new" in permisos %}
+				<div>
+				<a href="pacienteAgregar.php"><i class="btn btn-success">NUEVO PACIENTE</i></a>
+				</div>
+			{% endif %}
+				<div>
+				<a href="graficoDemograficos.php"><i class="btn btn-primary">DATOS DEMOGRAFICOS</i></a></div>
+		  	<br>
+				
+			<div>
+				<form name="form1" method="post" id="search-form1" action="buscarNombreApellido.php">
+			        <div>
+			            <label class="required" >Nombre del Paciente: </label>
+			            <input id="nombre_paciente" name="nombre_paciente" maxlength="254" type="text" >
+			            <label class="required" >Apellido del Paciente: </label>
+			            <input id="apellido_paciente" name="apellido_paciente" maxlength="254" type="text" >
+			            <input value="Buscar" type="submit">
+		  			</div>
+		  		 </form>
+		  	</div>
+		  	<div>
+		  		 <form name="form2" method="post" id="search-form2" action="buscarTipoNumero.php">
+		 			<div>
+		   				<label for="tipo_doc">Tipo de Documento:</label>
+						<select name="tipo_doc">
+							<option value="" selected>-- Seleccione una opcion --</option>
+							<option value="dni">DNI</option>
+							<option value="libreta civica">Libreta Civica</option>
+							<option value="libreta de enrolamiento">Libreta De Enrolamiento</option>
+						</select>
+
+		   				<label for="numero_doc" >Numero:</label>
+		   				<input name="numero_doc" id="numero_doc" maxlength="20" type="number" required>
+
+		   				<input value="Buscar" type="submit">
+		 			</div>
+		        </form>
+			</div>
+		</div>
+		  	<br>
+		
+		<div class="table-responsive"> 
+		<table class="table table-bordered">
+			<thead>
+				<th> Nombre </th>
+				<th> Apellido </th>
+				<th> Tipo de documento </th>
+				<th> Numero de documento </th>
+				<th> Datos paciente </th>
+				<th> Datos demogaficos </th>
+				<th> Historia clinica </th>
+
+			</thead>
+			<tbody>
+				{%for paciente  in pacientes %}
+				<tr>
+					<td>{{ paciente.nombre }}</td>
+					<td>{{ paciente.apellido }}</td>
+					<td>{{ paciente.tipo_doc }}</td>
+					<td>{{ paciente.numero_doc }}</td>
+					<td>
+						{% if "paciente_show" in permisos %}
+							<a href="pacienteVerMas.php?id={{paciente.id}}"><i class=" btn btn-default"> Ver Mas &nbsp;</i></a>
+						{% endif %}
+						{% if "paciente_update" in permisos %}
+							<a href="pacienteModificar.php?id={{paciente.id}}"><i class="btn btn-success"> Modificar &nbsp;</i></a>
+				    	{% endif %}
+
+				    	{% if "paciente_destroy" in permisos %}
+				    		<a href="pacienteBorrar.php?id={{paciente.id}}&id_demografico={{paciente.id_demografico}}"><i class="btn btn-danger"> Eliminar &nbsp;</i></a>
+				    	{% endif %}
+				    </td>
+				    <td>
+				    	{% if "demografico_show" in permisos %}
+				    		<a href="demograficoVerMas.php?id_paciente={{paciente.id}}"><i class="btn btn-default">Ver &nbsp;</i></a>
+				    	{% endif %}
+				    	{% if "demografico_update" in permisos %}
+				    		<a href="demograficoModificar.php?id_paciente={{paciente.id}}&id_demografico={{paciente.id_demografico}}"><i class="btn btn-success"> Modificar  &nbsp;</i></a>
+				    	{% endif %}
+				    	{% if "demografico_destroy" in permisos %}
+				    		<a href="demograficoBorrar.php?id_paciente={{paciente.id}}&id_demografico={{paciente.id_demografico}}"><i class="btn btn-danger"> Eliminar &nbsp;</i></a>
+				    	{% endif %}
+				    </td>
+				    <td>
+				    	{% if ( "historia_show" in permisos ) or ( "historia_destroy" in permisos ) %}
+				    		<a href="historiaVerTodas.php?id_paciente={{paciente.id}}"><i class="btn btn-default">Ver todas &nbsp;</i></a>
+				    	{% endif %}
+				    	{% if "historia_new" in permisos %}
+				    		<a href="historiaPageAgregar.php?id_paciente={{paciente.id}}"><i class="btn btn-success"> Cargar nueva &nbsp;</i></a>
+				    	{% endif %}
+				    </td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		</div>
+
+		<div class= "div-paginado">
+		{% if totalPaginas != 0 %}	
+			{% if paginaActual > 1 %}
+				<span class="indice-paginado"><a href='pacientes.php?pagina={{paginaActual-1}}'>Anterior</a></span>
+			{% endif %}
+
+			{% for i in 1..totalPaginas %}
+				{% if i == paginaActual %}
+					<span class="indice-paginado"> {{i}} </span>
+				{% endif %}
+				{% if i != paginaActual %}
+					<span class="indice-paginado"><a href='pacientes.php?pagina={{i}}'>{{i}}</a></span>
+				{% endif %}
+			{% endfor %}
+
+			{% if paginaActual < totalPaginas %}
+				<span class="indice-paginado"><a href='pacientes.php?pagina={{paginaActual+1}}'>Siguiente</a><span>
+			{% endif %}
+		{% endif %}
+		</div>
+
+	</div>
+
+
+{% endblock %}

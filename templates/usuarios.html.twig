@@ -1,0 +1,96 @@
+{% extends "backendGeneral.html.twig" %}
+	
+{% block content %}
+	<div class="container">
+    	{% if error != '' %}
+    			<script type="text/javascript"> alertify.success('{{error}}')</script>
+    	{% endif %}
+		<div class="usuarios-list">
+			{% if "usuario_new" in permisos %}
+			<div>
+				<a href="usuarioAgregar.php"><i class="btn btn-success">NUEVO USUARIO</i></a>
+			</div>
+			{% endif %}
+			
+			<div>
+		  	<br>
+			
+			<form name="form1" method="post" id="search-form1" action="buscarNombreUsuario.php">
+		        <div>
+		            <label class="required" >Nombre de Usuario:</label>
+		            <input id="nombre_usuario" name="nombre_usuario" maxlength="254" type="text" required>
+		            <input value="BUSCAR" type="submit">
+	  			</div>
+	  		 </form>
+	  		 <form name="form2" method="post" id="search-form2" action="buscarHabilitado.php">
+	 			<div>
+	 				<label for="estado">ESTADO:</label>
+					<select name="estado">
+						<option value="" selected>-- Seleccione una opcion --</option>
+						<option value="1">ACTIVO</option>
+						<option value="0">BLOQUEADO</option>
+					</select>
+	   				<input value="BUSCAR" type="submit">
+	 			</div>
+	        </form>
+			</div>
+
+		</div>
+		  	<br>
+
+		<div class="table-responsive"> 
+		<table class="table table-bordered">
+			<thead>
+				<th>Nombre de usuario </th>
+				<th>Nombre </th>
+				<th>Apellido </th>
+				<th>Operaciones </th>
+			</thead>
+			<tbody>
+				{%for usuario  in usuarios %}
+				<tr>
+					<td>{{usuario.username}}</td>
+					<td>{{usuario.firstname}}</td>
+					<td>{{usuario.lastname}}</td>
+
+					<td>
+						{% if "usuario_show" in permisos %}
+							<a href="usuarioVerMas.php?id={{usuario.id}}"><i class="btn btn-default">Ver Mas</i></a>
+						{% endif %}
+						{% if "usuario_update" in permisos %}
+							<a href="usuarioModificar.php?id={{usuario.id}}"><i class="btn btn-default">Modificar</i></a>
+						{% endif %}
+						{% if "usuario_destroy" in permisos %}
+				    		<a href="usuarioBorrar.php?id={{usuario.id}}"><i class="btn btn-danger">Eliminar</i></a>
+				    	{% endif %}
+				    </td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		</div>
+
+		<div class= "div-paginado">
+		{% if totalPaginas != 0 %}	
+			{% if paginaActual > 1 %}
+				<span class="indice-paginado"><a href='usuarios.php?pagina={{paginaActual-1}}'>Anterior</a></span>
+			{% endif %}
+
+			{% for i in 1..totalPaginas %}
+				{% if i == paginaActual %}
+					<span class="indice-paginado"> {{i}} </span>
+				{% endif %}
+				{% if i != paginaActual %}
+					<span class="indice-paginado"><a href='usuarios.php?pagina={{i}}'>{{i}}</a></span>
+				{% endif %}
+			{% endfor %}
+
+			{% if paginaActual < totalPaginas %}
+				<span class="indice-paginado"><a href='usuarios.php?pagina={{paginaActual+1}}'>Siguiente</a><span>
+			{% endif %}
+		{% endif %}
+		</div>
+
+	</div>
+
+{% endblock %}

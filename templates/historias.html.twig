@@ -1,0 +1,71 @@
+{% extends "backendGeneral.html.twig" %}
+	
+{% block content %}
+	<div class="container">
+		<h5>{{msj}}</h5>
+		<div>
+			{% if "historia_new" in permisos %}
+			<a href="historiaPageAgregar.php?id_paciente={{paciente_id}}"><i class="btn btn-success"> Cargar nueva &nbsp;</i></a>
+			{% endif %}
+
+			{% if msg == 'habilitar' %}
+				<a href="curvaCrecimiento.php?id_paciente={{paciente_id}}"><i class="btn btn-primary"> Curva Crecimiento &nbsp;</i></a>
+				<a href="curvaPpc.php?id_paciente={{paciente_id}}"><i class="btn btn-primary"> Curva PPC &nbsp;</i></a>
+			{% endif %}
+
+			{% if msg == 'habilitar-tallas' %}
+				<a href="curvaCrecimiento.php?id_paciente={{paciente_id}}"><i class="btn btn-primary"> Curva Crecimiento &nbsp;</i></a>
+				<a href="curvaTalla.php?id_paciente={{paciente_id}}"><i class="btn btn-primary"> Curva Talla &nbsp;</i></a>
+				<a href="curvaPpc.php?id_paciente={{paciente_id}}"><i class="btn btn-primary"> Curva PPC &nbsp;</i></a>
+			{% endif %}
+		</div>
+		<div class="table-responsive">
+		<table class="table table-bordered">
+			<thead>
+				<th> Historia Clinica </th>
+				<th> Controles </th>
+			</thead>
+			<tbody>
+				{%for historia  in historias %}
+				<tr>
+					<td>{{ historia.fecha }}</td>
+				    <td>
+				    	{% if "historia_show" in permisos %}
+				    		<a href="historiaVer.php?id_historia={{historia.id}}&id_paciente={{paciente_id}}"><i class="btn btn-default"> Ver &nbsp;</i></a>
+				    	{% endif %}
+				    	{% if "historia_update" in permisos %}
+				    		<a href="modificarInfoHistoria.php?id_historia={{historia.id}}"><i class="btn btn-success"> Modificar &nbsp;</i></a>
+				    	{% endif %}
+				    	{% if "historia_destroy" in permisos %}
+				    		<a href="historiaBorrar.php?id_historia={{historia.id}}&id_paciente={{paciente_id}}"><i class="btn btn-danger"> Eliminar &nbsp;</i></a>
+				    	{% endif %}
+				    </td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+
+		</div>
+		<div class= "div-paginado">
+		{% if totalPaginas != 0 %}	
+			{% if paginaActual > 1 %}
+				<span class="indice-paginado"><a href='pacientes.php?pagina={{paginaActual-1}}'>Anterior</a></span>
+			{% endif %}
+
+			{% for i in 1..totalPaginas %}
+				{% if i == paginaActual %}
+					<span class="indice-paginado"> {{i}} </span>
+				{% endif %}
+				{% if i != paginaActual %}
+					<span class="indice-paginado"><a href='pacientes.php?pagina={{i}}'>{{i}}</a></span>
+				{% endif %}
+			{% endfor %}
+
+			{% if paginaActual < totalPaginas %}
+				<span class="indice-paginado"><a href='pacientes.php?pagina={{paginaActual+1}}'>Siguiente</a><span>
+			{% endif %}
+		{% endif %}
+		</div>
+		<a class="volver" href="pacientes.php"><i class="btn btn-info">VOLVER</i></a>
+	</div>
+{% endblock %}

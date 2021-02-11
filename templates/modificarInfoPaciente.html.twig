@@ -1,0 +1,78 @@
+{% extends "backendGeneral.html.twig" %}
+	
+{% block content %}
+	<h1>Modificar paciente</h1>
+	<div id="mensaje" class="mensaje">{{error}}</div>
+	<form class="formulario" action="modificarInfoPaciente.php" method="post">
+		<input type="hidden" name="id" value="{{datos.id}}">
+		
+		<div>
+			<label for="apellido">Apellido: </label>
+			<input type="text" id="apellido" name="apellido" required="required" placeholder="Ingrese su apellido" value="{{datos.apellido}}">
+		</div>
+		
+		<div>
+			<label for="nombre">Nombre: </label>
+			<input type="text" id="nombre" name="nombre" required="required" placeholder="Ingrese su nombre" value="{{datos.nombre}}">
+		</div>
+
+		<div>
+			<label for="fecha_nac">Fecha de Nacimiento: </label>
+			<input type="date" id="fecha_nac" name="fecha_nac" value="{{datos.fecha_nac}}">
+		</div>
+
+		<div>
+			<label for="genero">Genero:</label>
+			<select name="genero">
+				<option value="masculino" {% if datos.genero=='masculino' %} selected {% endif %}>Masculino</option>
+				<option value="femenino" {% if datos.genero=='femenino' %} selected {% endif %}>Femenino</option>
+			</select>
+		</div>
+
+		<div>
+			<label for="tipo_doc">Tipo de Documento:</label>
+			<select name="tipo_doc">
+				
+				{% for tipo in tipo_doc_nombres %}
+				<option value="{{tipo}}" 
+					{% if datos.tipo_doc == tipo %} selected {% endif %}> {{tipo}}
+				</option>
+				{% endfor %}
+			
+			</select>
+
+		</div>
+
+		<div>
+			<label for="numero_doc">Numero Documento:</label>
+			<input type="text" id="numero_doc" name="numero_doc" required="required" placeholder="Ingrese numero" value="{{datos.numero_doc}}">
+		</div>
+
+		<div>
+			<label for="domicilio">Domicilio:</label>
+			<input type="text" id="domicilio" name="domicilio" required="required" placeholder="Ingrese domicilio" value="{{datos.domicilio}}">
+		</div>
+		
+		<div>
+			<label for="telcel">Telefono/Celular:</label>
+			<input type="text" id="telcel" name="telcel" required="required" placeholder="Ingrese telefono" value="{{datos.telcel}}">
+		</div>
+		
+		<div>
+			<label for="obra_social">Obra Social:</label>
+			<select name="obra_social">
+				
+				{% for obra_social in obra_social_nombres %}
+				<option value="{{obra_social}}"
+					{% if datos.obra_social == obra_social %} selected {% endif %}> {{obra_social}}
+				</option>
+				{% endfor %}
+				
+			</select>
+		</div>
+
+
+		<input type="submit" id="guardar" value="GUARDAR" class="btn btn-success">
+		<a class="cancelar" href="pacientes.php"><i class="btn btn-danger">CANCELAR</i></a>
+	</form>
+{% endblock %}

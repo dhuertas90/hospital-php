@@ -1,0 +1,23 @@
+{% extends "base.html.twig" %}
+
+
+{% block nav %}
+	<ul class="ulNav">
+		<li><img src="templates/static/HNRG3.JPG" style="height: 49px; border-radius: 13px"></li>
+		<li><a href="backend.php">HOME</a></li>
+		<li><a href="pacientes.php">PACIENTES</a></li>
+		<li style="float:right;"><a href="index.php?action=logout"> SALIR</a></li>
+		<li style="float:right;"><a>{{ nombre_usuario }}</a></li>
+		{% if "administrador" in roles %}
+			<li style="float: right;"><a href="usuarios.php">USUARIOS</a></li>
+			<li style="float: right;"><a href="configuracion.php">CONFIGURACI&Oacute;N</a></li>
+		{% endif %}	
+
+	</ul>
+{% endblock %}
+
+{%  block content %}
+<div class="container">
+	{{ descripcion | striptags('<section>,<h2>,<br>, <article>, <button>') | raw }}
+</div>
+{% endblock%}

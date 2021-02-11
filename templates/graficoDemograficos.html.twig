@@ -1,0 +1,80 @@
+{% extends "backendGeneral.html.twig" %}
+	
+{% block content %}
+
+	{% set c_madera = 0 %}
+	{% set c_material = 0 %}
+	{% set c_chapa = 0 %}
+
+	{% for vivienda in viviendas_porcentajes %}
+		{% if vivienda.nombre == 'Madera' %}
+	    	{% set c_madera	= vivienda.cantidad %}
+	    {% endif %}
+	    {% if vivienda.nombre == 'Material' %}
+	    	{% set c_material	= vivienda.cantidad %}
+	    {% endif %}
+	    {% if vivienda.nombre == 'Chapa' %}
+	    	{% set c_chapa	= vivienda.cantidad %}
+	    {% endif %}
+	{% endfor %}
+
+
+
+
+	<div>
+		<script src="templates/code/highcharts.js"></script>
+	<script src="templates/code/modules/exporting.js"></script>
+
+	<div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+
+
+
+	<script type="text/javascript">
+
+	Highcharts.chart('container', {
+	    chart: {
+	        plotBackgroundColor: null,
+	        plotBorderWidth: null,
+	        plotShadow: false,
+	        type: 'pie'
+	    },
+	    title: {
+	        text: ' Porcentaje de Tipo de vivienda de los Pacientes'
+	    },
+	    tooltip: {
+	        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+	    },
+	    plotOptions: {
+	        pie: {
+	            allowPointSelect: true,
+	            cursor: 'pointer',
+	            dataLabels: {
+	                enabled: true,
+	                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+	                style: {
+	                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+	                }
+	            }
+	        }
+	    },
+	    series: [{
+	        name: 'Brands',
+	        colorByPoint: true,
+	        data: [{
+	            name: 'Madera',
+	            y: {{ c_madera }}
+	        }, {
+	            name: 'Material',
+	            y: {{c_material }}
+	        }, {
+	            name: 'Chapa',
+	            y: {{ c_chapa }}
+	        }]
+	    }]
+	});
+	</script>
+
+	<a href="pacientes.php"><i class="btn btn-info">VOLVER</i></a>
+	</div>
+
+{% endblock %}

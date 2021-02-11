@@ -1,0 +1,133 @@
+{% extends "backendGeneral.html.twig" %}
+	
+{% block content %}
+<div class="row">
+	<div class="col-sm-4"></div>
+	<div class="col-sm-5">
+	<h1>Nuevo paciente</h1>
+	<form class="formulario form-horizontal" id="form" action="checkearAgregarPaciente.php" method="post">
+
+		<div class="form-group">
+			<label for="apellido" class="control-label">Apellido:</label>
+			<input type="text" id="apellido" name="apellido" class="form-control" placeholder="Ingrese apellido" required>
+		</div>
+		<div class="form-group">
+			<label for="nombre" class="control-label">Nombre:</label>
+			<input type="text" id="nombre" name="nombre" class="form-control" placeholder="Ingrese nombre" required>
+		</div>
+		<div class="form-group">
+			<label for="fecha_nac" class="control-label">Fecha de Nacimiento:</label>
+			<input type="date" id="fecha_nac" name="fecha_nac" class="form-control" required>
+		</div>
+		<div class="form-group">
+			<label for="genero" class="control-label" >Genero:</label>
+			<select name="genero" id="genero" class="form-control" required>
+				<option value="" selected>-- Seleccione una opcion --</option>
+				<option value="masculino">Masculino</option>
+				<option value="femenino">Femenino</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="tipo_doc" >Tipo de Documento:</label>
+			<select name="tipo_doc" id="tipo_doc" class="form-control" required>
+				<option value="" selected>-- Seleccione una opcion --</option>
+				
+				{% for tipo in tipo_doc_nombres %}
+				<option value={{tipo}}>{{tipo}}</option>
+				{% endfor %}
+			
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="numero_doc">Numero de Documento:</label>
+			<input type="number" id="numero_doc" name="numero_doc" class="form-control" placeholder="Ingrese numero documento" required>
+		</div>
+		<div class="form-group">
+			<label for="domicilio">Domicilio:</label>
+			<input type="text" id="domicilio" name="domicilio" class="form-control" placeholder="Ingrese domicilio" required>
+		</div>
+		<div class="form-group">
+			<label for="telcel">Telefono/Celular:</label>
+			<input type="number" id="telcel" name="telcel" class="form-control" placeholder="Ingrese telefono" required>
+		</div>
+		<div class="form-group">
+			<label for="obra_social">Obra Social:</label>
+			<select name="obra_social" id="obra_social" class="form-control" required>
+				<option value="" selected>-- Seleccione una opcion --</option>
+				
+				{% for obra_social in obra_social_nombres %}
+				<option value={{obra_social}}>{{obra_social}}</option>
+				{% endfor %}
+				
+			</select>
+		</div>
+
+
+		<a onclick="isValid()" id="agregar" class="btn btn-success">AGREGAR</a>
+		<a class="btn btn-danger" href="pacientes.php">CANCELAR</a>
+	</form>
+	</div>
+	<script type="text/javascript">
+
+	function isString(obj) {
+		if($.type(obj) === "string")
+			return true
+		else
+			return false
+	}
+
+	function isValid() {
+		if ($('#apellido').val()) {
+			if ($('#nombre').val()) {
+				if ($('#fecha_nac').val()) {
+					if ($('#genero').val()) {
+						if ($('#tipo_doc').val()) {
+							if ($.isNumeric($('#numero_doc').val())) {
+								if($('#numero_doc').val()){
+									if ($.isNumeric($('#numero_doc').val())) {
+										if ($('#domicilio').val()) {
+											if ($('#telcel').val()) {
+												if ($('#obra_social').val()) {
+													$('#form').submit();
+												}else{
+													alertify.error("Debe ingresar su obra social")
+												}
+										}else{
+											alertify.error("Debe ingresar un numero de telefono")
+										}
+
+										}else{
+											alertify.error("Debe seleccionar una obra social")
+										}
+									}else{
+										alertify.error("El numero de documento no debe contener letras")
+									}
+								}else{
+									alertify.error("Debe ingresar el domicilio")
+								}
+							}else{
+								alertify.error("Debe ingresar un numero de documento")
+							}
+						}else{
+							alertify.error("Debe seleccionar un tipo de documento")
+						}
+					}else{
+						alertify.error("Debe seleccionar un genero")
+					}
+				}else{
+					alertify.error("Debe ingresar una fecha de nacimiento")
+				}
+
+			}else{
+				alertify.error("Debe ingresar un nombre")
+			}
+		}else{
+			alertify.error("Debe ingresar un apellido")
+		}
+	}
+	
+	</script>
+
+</div>
+
+{% endblock %}

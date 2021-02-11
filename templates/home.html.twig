@@ -1,0 +1,25 @@
+{% extends "base.html.twig" %}
+
+{% block css %}
+	<link rel="stylesheet" type="text/css" href="./templates/index.css" />
+{% endblock css %}
+
+{% block nav %}
+		<ul class="unNav">
+			<li><a href="">LOGO</a></li>
+			<li><a href="index.php">HOME</a></li>
+			<li style="float:right"><a href="login.php">LOGIN</a></li>
+		</ul>
+{% endblock nav %}
+
+{% block content %}
+	<div class="container">
+		{{ descripcion | striptags('<section>,<h2>,<br>, <article>, <button>') | raw }}
+	</div>
+
+<!-- 	<style type="text/css">
+		.container {
+			background-image: url('/templates/static/hospi.jpg') cover no-repeat !important;
+		}
+	</style> -->
+{% endblock content %}

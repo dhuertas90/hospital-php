@@ -1,0 +1,63 @@
+{% extends "backendGeneral.html.twig" %}
+	
+{% block content %}
+	<h1>Modificar informaci&oacute;n del usuario</h1>
+	<div id="mensaje" class="mensaje">{{error}}</div>
+	<form class="formulario" action="modificarInfoUsuario.php" method="post">
+		<input type="hidden" id="id" name="id" value="{{datos.id}}">
+		<input type="hidden" id="created_at" name="created_at" value="{{datos.createdAt}}">
+
+		<div>
+			<label for="rol">Roles:</label>
+			<span>Administrador</span><input type="checkbox" id="roles_group[]" name="roles_group[]" value="1" 
+				{% if 'administrador' in roles_usuario %}
+					checked
+				{% endif %} />
+			<span>Pediatra</span><input type="checkbox" id="roles_group[]" name="roles_group[]" value="2" 
+				{% if 'pediatra' in roles_usuario %}
+					checked
+				{% endif %}/>
+			<span>Recepcionista</span><input type="checkbox" id="roles_group[]" name="roles_group[]" value="3" 
+				{% if 'recepcionista' in roles_usuario %}
+					checked
+				{% endif %}/>
+		</div>
+
+		<div>
+			<input type="hidden" id="nombreUsuario_anterior" name="nombreUsuario_anterior" value="{{datos.username}}">
+			<label for="nombreUsuario_usuario">Nombre de usuario:</label>
+			<input type="text" id="nombre_usuario" name="nombre_usuario" required="required" placeholder="ingrese nombre de usuario" value="{{datos.username}}">
+		</div>
+		<div>
+			<label for="nombre">Nombre:</label>
+			<input type="text" id="nombre" name="nombre" required="required" placeholder="Ingrese su nombre" value="{{datos.firstname}}">
+		</div>
+		<div>
+			<label for="apellido">Apellido:</label>
+			<input type="text" id="apellido" name="apellido" required="required" placeholder="Ingrese su apellido" value="{{datos.lastname}}">
+		</div>
+		<div>
+			<label for="email">Email:</label>
+			<input type="email" id="email" name="email" required="required" placeholder="Ingrese su email" value="{{datos.email}}">
+		</div>
+		<div>
+			<label for="habilitado">Habilitado</label>
+			{% if datos.active == 1 %}
+				{% set habilitado='checked' %}
+				{% set deshabilitado='' %}
+			{% endif %}	
+			{% if datos.active == 0 %}
+				{% set habilitado='' %}
+				{% set deshabilitado='checked' %}
+			{% endif %}	
+			<span>Si</span><input type="radio" id="habilitado" name="habilitado" value="1" {{habilitado}}>
+			<span>No</span><input type="radio" id="habilitado" name="habilitado" value="0" {{deshabilitado}}>
+		</div>
+		<div>
+			<input type="hidden" id="password" name="password" required="required" value="{{datos.password}}">
+		</div>
+
+		<input type="submit" id="guardar" value="GUARDAR" class="btn btn-success">
+		<a class="cancelar" href="usuarios.php"><i class="btn btn-danger">CANCELAR</i></a>
+	</form>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends "backendGeneral.html.twig" %}
+	
+{% block content %}
+	<h1>PACIENTE: {{datos_paciente.apellido | title}}, {{datos_paciente.nombre | title}}</h1>
+	<section class="container">
+			<table>
+				<tr>
+					<th>Nombre</th>
+					<td>{{datos_paciente.nombre}}</td>
+				</tr>
+				<tr>
+					<th>Apellido</th>
+					<td>{{datos_paciente.apellido}}</td>
+				</tr>
+				<tr>
+					<th>Fecha Nacimiento</th>
+					<td>{{datos_paciente.fecha_nac}}</td>
+				</tr>
+				<tr>
+					<th>Genero</th>
+					<td>{{datos_paciente.genero}}</td>
+				</tr>
+				<tr>
+					<th>Tipo Documento</th>
+					<td>{{datos_paciente.tipo_doc}}</td>
+				</tr>
+				<tr>
+					<th>Numero Documento</th>
+					<td>{{datos_paciente.numero_doc}}</td>
+				</tr>
+				<tr>
+					<th>Domicilio</th>
+					<td>{{datos_paciente.domicilio}}</td>
+				</tr>
+				<tr>
+					<th>Telefono/Celular</th>
+					<td>{{datos_paciente.telcel}}</td>
+				</tr>
+				<tr>
+					<th>Obra Social</th>
+					<td>{{datos_paciente.obra_social}}</td>
+				</tr>
+			</table>
+			<a class="volcer" href="pacientes.php"><i class="btn btn-info">VOLVER</i></a>
+		</section>
+{% endblock %}

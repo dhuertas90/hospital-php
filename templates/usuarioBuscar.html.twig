@@ -1,0 +1,20 @@
+{% extends "backendGeneral.html.twig" %}
+{% block content %}
+
+	<form class="formulario" action="buscarNombreUsuario.php" method="post">
+		<div>
+			<label for="nombre_usuario">Nombre de usuario:</label>
+			<input type="text" id="nombre_usuario" name="nombre_usuario" required="required" placeholder="ingrese nombre de usuario">
+		</div>
+		<input type="submit" id="buscar" value="BUSCAR">
+	</form>
+
+	<form class="formulario" action="buscarHabilitado.php" method="post">
+		<div>
+			<label for="habilitado">Estado del usuario (habilitado/bloqueado):</label>
+			<input type="text" id="estado" name="estado" required="required" placeholder="ingrese estado del usuario">
+		</div>
+		<input type="submit" id="buscar" value="BUSCAR">
+	</form>
+
+{% endblock %}

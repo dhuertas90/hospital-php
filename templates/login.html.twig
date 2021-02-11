@@ -1,0 +1,30 @@
+{% extends "base.html.twig" %}
+
+{% block css %}
+	<link rel="stylesheet" type="text/css" href="./templates/login.css" />
+{% endblock css %}
+
+{% block content %}
+	<div class="container">
+		<div  class="login">
+			<h4> Ingreso al sistema</h4>
+		    <div id="login">
+		    	<h5>{{error}}</h5>
+		        <form name="form-login" method="post" id="login-form" action="checkearIniciar.php">
+
+			        <div>
+			            <label class="datos-login" >Usuario:</label>
+			            <input id="username" name="username" maxlength="254" type="text" required>
+		  			</div>
+		 			<div>
+		   				<label class="datos-login" >Contraseña:</label>
+		   				<input name="password" id="password" type="password" required>
+		 			</div>
+		 			<div>
+		    			<label></label><input value="Ingresar" type="submit">
+		 			</div>
+		        </form>
+		    </div>
+		</div>
+	</div>
+{% endblock content %}

@@ -1,0 +1,78 @@
+{% extends "backendGeneral.html.twig" %}
+	
+{% block content %}
+	<h1>PACIENTE:  {{paciente.apellido}}, {{paciente.nombre}}</h1>
+	<div id="mensaje" class="mensaje">{{error}}</div>
+	{% if (error == '') or (error == 'Los datos se modificaron correctamente') %}
+
+	<form class="formulario" action="modificarInfoDemografico.php" method="post">
+		<input type="hidden" id="id_paciente" name="id_paciente" value="{{paciente.id}}">
+		<input type="hidden" id="id_demografico" name="id_demografico" value="{{datos.id}}">
+
+		<div>
+			<label for="heladera">Heladera:</label>
+			<select name="heladera">
+				<option value="1">SI</option>
+				<option value="0">NO</option>
+			</select>
+		</div>
+		<div>
+			<label for="electricidad">Electricidad:</label>
+			<select name="electricidad">
+				<option value="1" {% if datos.electricidad==1 %} selected {% endif %}>SI</option>
+				<option value="0" {% if datos.electricidad==0 %} selected {% endif %}>NO</option>
+			</select>
+		</div>
+		<div>
+			<label for="mascota">Mascota:</label>
+			<select name="mascota">
+				<option value="1" {% if datos.mascota==1 %} selected {% endif %}>SI</option>
+				<option value="0" {% if datos.mascota==0 %} selected {% endif %}>NO</option>
+			</select>
+		</div>
+
+		<div>
+			<label for="tipo_vivienda">Tipo de vivienda:</label>
+			<select name="tipo_vivienda">
+			
+			{% for tipo_v in tipo_vivienda %}
+			<option value="{{tipo_v}}" 
+				{% if datos.tipo_vivienda==tipo_v %} selected {% endif %}> {{tipo_v}}
+			</option>
+			{% endfor %}
+
+			</select>
+		</div>
+		<div>
+			<label for="tipo_calefaccion">Tipo de calefaccion:</label>
+			<select name="tipo_calefaccion">
+			
+			{% for tipo_c in tipo_calefaccion %}
+			<option value="{{tipo_c}}" 
+				{% if datos.tipo_calefaccion==tipo_c %} selected {% endif %}> {{tipo_c}}
+			</option>
+			{% endfor %}
+
+			</select>
+		</div>
+		<div>
+			<label for="tipo_agua">Tipo de agua:</label>
+			<select name="tipo_agua">
+			
+			{% for tipo_a in tipo_agua %}
+			<option value="{{tipo_a}}" 
+				{% if datos.tipo_agua==tipo_a %} selected {% endif %}> {{tipo_a}}
+			</option>
+			{% endfor %}
+
+			</select>
+		</div>
+
+		<input type="submit" id="guardar" value="GUARDAR" class="btn btn-success">
+		<a class="cancelar" href="pacientes.php"><i class="btn btn-danger">CANCELAR</i></a>
+	</form>
+	{% endif %}
+	{% if (error == "NO EXISTEN DATOS DEMOGRAFICOS PARA ESTE PACIENTE") %}
+		<a class="cancelar" href="pacientes.php"><i class="btn btn-info">VOLVER</i></a>
+	{% endif %}
+{% endblock %}

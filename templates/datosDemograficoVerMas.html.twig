@@ -1,0 +1,56 @@
+{% extends "backendGeneral.html.twig" %}
+	
+{% block content %}
+	
+
+	{% if error=="DATOS DEMOGRAFICOS" %}
+	<h1>PACIENTE: {{datos_paciente.apellido | title}}, {{datos_paciente.nombre | title}}</h1>
+	<section class="container">
+		<table>
+
+			<tr>
+				<th>Heladera</th>
+				{% if datos_demograficos.heladera == 1 %}
+						<td>SI</td>
+				{% endif %}
+				{% if datos_demograficos.heladera == 0 %}
+						<td>NO</td>
+				{% endif %}
+			</tr>
+			<tr>
+				<th>Electricidad</th>
+				{% if datos_demograficos.electricidad == 1 %}
+						<td>SI</td>
+				{% endif %}
+				{% if datos_demograficos.electricidad == 0 %}
+						<td>NO</td>
+				{% endif %}
+			</tr>
+			<tr>
+				<th>Mascotas</th>
+				{% if datos_demograficos.mascota == 1 %}
+						<td>SI</td>
+				{% endif %}
+				{% if datos_demograficos.mascota == 0 %}
+						<td>NO</td>
+				{% endif %}
+			</tr>
+				</tr>
+			<tr>
+				<th>Tipo de vivienda</th>
+				<td>{{datos_demograficos.tipo_vivienda}}</td>
+			</tr>
+			<tr>
+				<th>Tipo de calefaccion</th>
+				<td>{{datos_demograficos.tipo_calefaccion}}</td>
+			</tr>
+			<tr>
+				<th>Tipo de agua</th>
+				<td>{{datos_demograficos.tipo_agua}}</td>
+			</tr>
+				
+		</table>
+	{% endif %}
+		<a class="volver" href="pacientes.php"><i class="btn btn-info">VOLVER</i></a>
+	</section>
+{% endblock %}
