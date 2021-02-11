@@ -1,7 +1,0 @@
-
-BOT:
-	Nombre: TurnosProyecto2017
-	USERNAME: grupo53_bot
-
-	TOKEN: 493696957:AAGsrZOASSwOwUAB5csiY5BRrIxd6jjSPv0
-	CHAT_ID: 454523550
